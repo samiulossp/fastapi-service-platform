@@ -2,6 +2,11 @@ from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from sqlalchemy import text
+from app.core.database import Base, engine
+from app.modules.user.models.users import User
+from app.modules.authentication.models.users_auth_token import UserAuthToken
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
