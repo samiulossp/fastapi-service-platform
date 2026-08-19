@@ -5,24 +5,17 @@ from sqlalchemy import text
 from app.core.database import Base, engine
 from app.modules.user.models.users import User
 from app.modules.authentication.models.users_auth_token import UserAuthToken
+from app.routes import register_routes
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+register_routes(app)
+
 @app.get("/")
 async def read_root():
     return {"message": "FastAPI service platform is running!"}
-
-@app.get('/test-db')
-async def test_db(db : Session = Depends(get_db)):
-    try:
-        result = db.execute(text("SELECT 1"))
-        result.fetchone()
-        return {"message": "Database is Connected!"}
-    except Exception as e:
-        return {"error": str(e)}
-
 
 
 if __name__ == "__main__":
