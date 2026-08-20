@@ -1,8 +1,13 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional
+from datetime import date
 
 class SignUpRequest(BaseModel):
-    user_email : EmailStr
+    name : str
+    identity : str
+    email : EmailStr
+    mobile : str
+    birthday: Optional[date] = None
     password : str
 
 class SignUpResponse(BaseModel):

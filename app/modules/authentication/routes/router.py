@@ -11,8 +11,8 @@ from app.modules.authentication.schemas.sign_up_schema import SignUpRequest
 
 router = APIRouter(prefix="/auth")
 
-ACCESS_TOKEN_EXPIRY_MINUTES = 60
-REFRESH_TOKEN_EXPIRY_DAYS = 30
+ACCESS_TOKEN_EXPIRY_MINUTES = 5
+REFRESH_TOKEN_EXPIRY_DAYS = 7
 DEFAULT_USER_TYPE = "5x505"
 
 
@@ -71,10 +71,6 @@ async def auth_sign_up(signup_request: SignUpRequest, db: Session = Depends(get_
         content={
             "success": True,
             "message": "User registered successfully",
-            "data": {
-                "access_token": access_token,
-                "token_type": "bearer",
-                "refresh_token": refresh_token,
-            }
+            "data": {}
         }
     )
